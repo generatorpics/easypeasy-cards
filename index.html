@@ -861,8 +861,11 @@ function buildPhrases(){
   const aln=ALN.phrases;
   const ff=`'${F.en}',sans-serif`;
   return lines.map(line=>{
-    const parts=line.split('|').map(p=>p.trim());
-    const en=parts[0]||'',tr=parts[1]||'',ru=parts[2]||'';
+    const rawParts=line.split('|');
+    // Preserve leading spaces as non-breaking spaces for indentation
+    const en=(rawParts[0]||'').replace(/^( +)/,(_,s)=>'\u00a0'.repeat(s.length)).trimEnd();
+    const tr=(rawParts[1]||'').trim();
+    const ru=(rawParts[2]||'').trim();
     return `<div style="margin-bottom:${gap};text-align:${aln}">
       <span style="font-size:${szEn};font-weight:800;color:${C.en};font-family:${ff};line-height:${lh}">${en}</span>
       ${tr?` <span style="font-size:${szTr};font-weight:500;font-style:italic;color:${C.tr};font-family:${ff};line-height:${lh}">${tr}</span>`:''}
