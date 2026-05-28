@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Easy Peasy — Pro Generator</title>
+<title>Easy Peasy — Pro Generator v3</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,400&family=Roboto:wght@400;700;900&family=Nunito:wght@400;700;800;900&family=Raleway:wght@400;700;800;900&family=Oswald:wght@400;600;700&family=Ubuntu:wght@400;700&family=Exo+2:wght@400;700;800;900&family=PT+Sans:wght@400;700&family=Russo+One&family=Bebas+Neue&display=swap');
 :root{--red:#CC1F1F;--navy:#1B3A6B;--cream:#F5F0EB;--green:#1a7a3a;}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Montserrat',sans-serif;background:#0e0e1a;color:#fff;min-height:100vh;padding:14px 12px 60px}
-.header{text-align:center;margin-bottom:18px}
+.header{text-align:center;margin-bottom:16px}
 .header h1{font-size:18px;font-weight:900;color:var(--cream);letter-spacing:1px;margin-bottom:3px}
 .header p{font-size:11px;color:#666}
-.layout{display:grid;grid-template-columns:370px 1fr;gap:22px;max-width:1200px;margin:0 auto;align-items:start}
+.layout{display:grid;grid-template-columns:370px 1fr;gap:20px;max-width:1200px;margin:0 auto;align-items:start}
 .controls{display:flex;flex-direction:column;gap:8px;position:sticky;top:12px;max-height:96vh;overflow-y:auto;padding-right:4px}
 .controls::-webkit-scrollbar{width:3px}
 .controls::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:2px}
@@ -23,48 +23,70 @@ body{font-family:'Montserrat',sans-serif;background:#0e0e1a;color:#fff;min-heigh
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red)}
 .field textarea{line-height:1.5}
 .field small{display:block;margin-top:3px;font-size:10px;color:#444;line-height:1.5}
-
-/* FORMAT TABS */
 .fmt-tabs{display:flex;gap:4px;flex-wrap:wrap}
 .fmt-tab{flex:1;min-width:70px;padding:7px 4px;border:1.5px solid #1e1e2e;border-radius:7px;background:#080810;color:#666;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center}
 .fmt-tab .ico{display:block;font-size:14px;margin-bottom:2px}
 .fmt-tab.active{border-color:var(--red);color:#fff;background:#160404}
 
-/* TEMPLATE BUTTONS */
+/* ══ LIBRARY — FIXED ══ */
+.lib-wrap{display:flex;flex-direction:column;gap:6px}
+.lib-search{width:100%;background:#080810;border:1.5px solid #1e1e2e;border-radius:7px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;padding:7px 10px;outline:none}
+.lib-search:focus{border-color:var(--red)}
+.lib-cats{display:flex;gap:4px;flex-wrap:wrap}
+.lib-cat{padding:4px 8px;border:1.5px solid #1e1e2e;border-radius:6px;background:#080810;color:#666;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lib-cat:hover{border-color:#444;color:#aaa}
+.lib-cat.active{border-color:var(--red);color:#fff;background:#160404}
+.lib-items{display:grid;grid-template-columns:1fr 1fr;gap:4px;max-height:240px;overflow-y:auto}
+.lib-items::-webkit-scrollbar{width:3px}
+.lib-items::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:2px}
+.lib-btn{padding:7px 8px;border:1.5px solid #1e1e2e;border-radius:6px;background:#080810;color:#888;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left;width:100%}
+.lib-btn:hover{border-color:var(--red);color:#fff;background:#160404}
+.lib-btn .lb-name{display:block;font-size:10px;font-weight:800;color:var(--cream)}
+.lib-btn .lb-cnt{display:block;font-size:9px;color:#555;margin-top:1px}
+.lib-btn.custom-topic{border-color:#1e3a5f}
+.lib-btn.custom-topic .lb-name{color:#90CAF9}
+
+/* ADD CUSTOM */
+.add-custom{background:#080810;border:1.5px solid #1e3a5f;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:5px}
+.add-custom input,.add-custom textarea{background:#050508;border:1.5px solid #1e1e2e;border-radius:6px;color:#fff;font-family:'Montserrat',sans-serif;font-size:11px;padding:6px 8px;outline:none;width:100%;resize:vertical;line-height:1.5}
+.add-custom input:focus,.add-custom textarea:focus{border-color:var(--red)}
+.add-btn{padding:7px;border:none;border-radius:6px;background:var(--navy);color:#fff;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s}
+.add-btn:hover{background:var(--red)}
+
+/* WEEK */
+.week-list{display:flex;flex-direction:column;gap:3px;max-height:220px;overflow-y:auto}
+.week-list::-webkit-scrollbar{width:3px}
+.week-list::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:2px}
+.week-row{display:flex;align-items:center;gap:6px;padding:6px 8px;border:1.5px solid #1e1e2e;border-radius:6px;background:#080810;cursor:default}
+.week-row:hover{border-color:#333}
+.wr-day{font-size:9px;font-weight:800;color:var(--red);min-width:30px;flex-shrink:0}
+.wr-rub{font-size:9px;font-weight:700;color:#90CAF9;flex-shrink:0;max-width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.wr-title{font-size:9px;color:#555;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.wr-btn{font-size:10px;color:#555;background:none;border:1px solid #1e1e2e;cursor:pointer;padding:2px 7px;border-radius:4px;transition:all .2s;flex-shrink:0;font-family:'Montserrat',sans-serif;font-weight:700}
+.wr-btn:hover{border-color:var(--red);color:#fff}
+
+/* TEMPLATES */
 .tpl-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.tpl-btn{padding:7px 6px;border:1.5px solid #1e1e2e;border-radius:7px;background:#080810;color:#888;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left}
+.tpl-btn{padding:6px 8px;border:1.5px solid #1e1e2e;border-radius:7px;background:#080810;color:#888;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left}
 .tpl-btn:hover{border-color:var(--red);color:#fff}
-.tpl-btn .tpl-name{font-size:10px;font-weight:800;color:var(--red);display:block}
-.tpl-btn .tpl-desc{font-size:9px;color:#555;margin-top:1px}
+.tpl-btn .tn{font-size:10px;font-weight:800;color:var(--red);display:block}
+.tpl-btn .td{font-size:9px;color:#555;margin-top:1px}
 
-/* LIBRARY */
-.lib-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;max-height:200px;overflow-y:auto}
-.lib-item{padding:6px 8px;border:1.5px solid #1e1e2e;border-radius:6px;background:#080810;cursor:pointer;transition:all .2s}
-.lib-item:hover{border-color:var(--red)}
-.lib-item .lib-topic{font-size:10px;font-weight:800;color:var(--cream);display:block}
-.lib-item .lib-count{font-size:9px;color:#555}
-
-/* SLIDERS */
 .slider-group{display:flex;flex-direction:column;gap:4px}
 .slider-row{display:flex;align-items:center;gap:6px}
 .slider-label{font-size:10px;color:#666;min-width:85px}
 .slider-row input[type=range]{flex:1;accent-color:var(--red);height:4px}
 .slider-val{font-size:10px;font-weight:700;color:var(--cream);min-width:34px;text-align:right}
-
-/* POS GRID */
 .pos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:100%;aspect-ratio:1}
 .pos-btn{border:1.5px solid #1e1e2e;border-radius:5px;background:#080810;color:#555;font-size:13px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
 .pos-btn:hover{border-color:#444;color:#999}
 .pos-btn.active{border-color:var(--red);color:#fff;background:#160404}
-
 .align-row{display:flex;gap:4px}
 .align-btn{flex:1;padding:5px;border:1.5px solid #1e1e2e;border-radius:6px;background:#080810;color:#666;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s}
 .align-btn.active{border-color:var(--red);color:#fff;background:#160404}
-
 .font-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
 .font-btn{padding:5px 6px;border:1.5px solid #1e1e2e;border-radius:6px;background:#080810;color:#888;font-size:10px;font-weight:700;cursor:pointer;transition:all .2s;text-align:center}
 .font-btn.active{border-color:var(--red);color:#fff;background:#160404}
-
 .color-row{display:flex;align-items:center;gap:5px;margin-top:4px}
 .color-row label{font-size:10px;color:#666;min-width:85px;flex-shrink:0}
 .color-row input[type=color]{width:28px;height:24px;border:none;border-radius:5px;cursor:pointer;padding:1px;background:transparent;flex-shrink:0}
@@ -74,75 +96,58 @@ body{font-family:'Montserrat',sans-serif;background:#0e0e1a;color:#fff;min-heigh
 .csw{width:20px;height:20px;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:all .2s;flex-shrink:0}
 .csw:hover{transform:scale(1.2)}
 .csw.active{border-color:#fff;box-shadow:0 0 0 1px #fff}
-
 .bg-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
 .bg-pre{height:26px;border-radius:5px;cursor:pointer;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;transition:all .2s;text-align:center;padding:0 2px}
 .bg-pre:hover{transform:scale(1.05)}
 .bg-pre.active{border-color:#fff}
-
 .tog-row{display:flex;align-items:center;gap:7px}
 .tog{width:32px;height:17px;background:#1e1e2e;border-radius:9px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
 .tog.on{background:var(--red)}
 .tog::after{content:'';position:absolute;width:13px;height:13px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .2s}
 .tog.on::after{left:17px}
 .tog-lbl{font-size:11px;color:#888}
-
-/* DOWNLOAD BUTTONS */
 .dl-row{display:flex;gap:6px;flex-wrap:wrap}
 .btn{padding:10px 12px;border:none;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;flex:1;min-width:80px}
 .btn:active{transform:scale(.97)}
 .btn-p{background:var(--red);color:#fff}
 .btn-g{background:var(--green);color:#fff}
 .btn-s{background:var(--navy);color:#fff}
-.btn-y{background:#c8860a;color:#fff}
 .btn:hover{opacity:.85}
 .hint{font-size:10px;color:#444;text-align:center;line-height:1.6}
-
-/* PROGRESS */
-.progress{display:none;background:#0a0a18;border:1px solid #1e1e2e;border-radius:8px;padding:10px 14px;text-align:center;font-size:12px;color:#7EB8FF}
+.progress{display:none;background:#0a1628;border:1px solid #1e3a5f;border-radius:8px;padding:8px 14px;text-align:center;font-size:12px;color:#7EB8FF}
 .progress.show{display:block}
+.toast{position:fixed;bottom:20px;right:20px;background:#1a7a3a;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;padding:10px 16px;border-radius:8px;z-index:9999;display:none;box-shadow:0 4px 20px rgba(0,0,0,.5);transition:all .3s}
+.toast.show{display:block}
 
-/* ══ PREVIEW ══ */
+/* ══ CARD ══ */
 .preview-col{display:flex;flex-direction:column;align-items:center;gap:10px}
 .fmt-badge{font-size:10px;font-weight:700;color:#444;letter-spacing:1px;text-transform:uppercase;text-align:center}
-
-#card-wrap{display:flex;justify-content:center;align-items:center;transition:all .3s}
 #card{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 12px 50px rgba(0,0,0,.7);transition:all .3s;width:440px;height:440px;background:#0d2240}
 #card.vertical{width:275px;height:489px}
 #card.youtube{width:440px;height:248px}
 #card.stories{width:275px;height:489px}
-
-.cwm{position:absolute;bottom:10px;right:10px;width:36px;height:36px;border-radius:50%;object-fit:cover;opacity:.5;border:2px solid rgba(255,255,255,.2);z-index:10;transition:all .3s}
-#card.youtube .cwm{width:30px;height:30px}
+.cwm{position:absolute;bottom:10px;right:10px;width:36px;height:36px;border-radius:50%;object-fit:cover;opacity:.5;border:2px solid rgba(255,255,255,.2);z-index:10}
 .ctag{position:absolute;top:10px;left:12px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;z-index:10}
 .cflag{position:absolute;top:10px;right:12px;width:24px;height:16px;border-radius:3px;z-index:10;opacity:.65}
-#card.youtube .cflag{width:30px;height:20px;top:12px;right:14px}
-
 .c-title-block{position:absolute;z-index:6;word-break:break-word;white-space:pre-wrap}
 .c-phrases-block{position:absolute;z-index:5;overflow:hidden}
 .c-tip-block{position:absolute;z-index:5;word-break:break-word;white-space:pre-wrap}
-
-/* YouTube special styles */
-#card.youtube .c-title-block{font-size:22px!important}
-
 .stats-bar{display:flex;gap:10px;align-items:center;background:#0a0a18;border:1px solid #1e1e2e;border-radius:8px;padding:7px 12px;font-size:11px}
 .stat{display:flex;flex-direction:column;align-items:center;gap:1px}
 .stat-val{font-size:12px;font-weight:800;color:var(--cream)}
 .stat-lbl{font-size:8px;color:#555;text-transform:uppercase;letter-spacing:.5px}
 .s-ok .stat-val{color:#2ecc71}.s-warn .stat-val{color:#f39c12}.s-bad .stat-val{color:#e74c3c}
-
 @media(max-width:880px){.layout{grid-template-columns:1fr}.controls{position:static;max-height:none}#card{width:320px;height:320px}#card.vertical,#card.stories{width:210px;height:373px}#card.youtube{width:320px;height:180px}}
 </style>
 </head>
 <body>
 <div class="header">
-  <h1>🇬🇧 Easy Peasy — Pro Generator</h1>
-  <p>Скачивание PNG · Шаблоны по рубрикам · Библиотека фраз · Все форматы · YouTube превью</p>
+  <h1>🇬🇧 Easy Peasy — Pro Generator v3</h1>
+  <p>25 тем · 200+ фраз · Скачивание PNG · Все форматы · Работает онлайн</p>
 </div>
 <div class="layout">
 <div class="controls">
 
-  <!-- FORMAT -->
   <div class="sec">Формат</div>
   <div class="fmt-tabs">
     <button class="fmt-tab active" id="fmtSq" onclick="setFmt('square')"><span class="ico">⬛</span>Квадрат<br>1080×1080<br><span style="color:#555">Telegram</span></button>
@@ -151,22 +156,34 @@ body{font-family:'Montserrat',sans-serif;background:#0e0e1a;color:#fff;min-heigh
     <button class="fmt-tab" id="fmtSt" onclick="setFmt('stories')"><span class="ico">📸</span>Stories<br>1080×1920<br><span style="color:#555">Instagram</span></button>
   </div>
 
-  <!-- TEMPLATES -->
-  <div class="sec">Шаблоны по рубрикам (1 клик)</div>
-  <div class="tpl-grid" id="tplGrid"></div>
-
   <!-- LIBRARY -->
-  <div class="sec">📚 Библиотека фраз (нажми — заполнится)</div>
-  <div class="lib-grid" id="libGrid"></div>
+  <div class="sec">📚 Библиотека фраз — 25 тем, 200+ фраз</div>
+  <div class="lib-wrap">
+    <input class="lib-search" id="libSearch" placeholder="🔍 Поиск по теме или фразе..." oninput="renderLib()">
+    <div class="lib-cats" id="libCats"></div>
+    <div class="lib-items" id="libItems"></div>
+  </div>
+
+  <!-- ADD CUSTOM -->
+  <div class="sec">➕ Добавить свою тему</div>
+  <div class="add-custom">
+    <input id="customName" placeholder="Название темы (например: 🏖 Пляж)" type="text">
+    <textarea id="customPhrases" placeholder="EN | транскрипция | перевод" style="min-height:65px"></textarea>
+    <button class="add-btn" onclick="addCustom()">💾 Сохранить в библиотеку</button>
+  </div>
+
+  <!-- WEEK -->
+  <div class="sec">📅 Контент недели (нажми ↓ — загрузится)</div>
+  <div class="week-list" id="weekList"></div>
+
+  <!-- TEMPLATES -->
+  <div class="sec">🎨 Шаблоны по рубрикам</div>
+  <div class="tpl-grid" id="tplGrid"></div>
 
   <!-- BG -->
   <div class="sec">Фон</div>
   <div class="bg-presets" id="bgPre"></div>
-  <div class="color-row">
-    <label>Свой цвет</label>
-    <input type="color" id="bgPk" value="#0d2240" oninput="setBg(this.value)">
-    <input type="text" id="bgHx" value="#0d2240" oninput="setBg(this.value)" maxlength="7">
-  </div>
+  <div class="color-row"><label>Свой цвет</label><input type="color" id="bgPk" value="#0d2240" oninput="setBg(this.value)"><input type="text" id="bgHx" value="#0d2240" oninput="setBg(this.value)" maxlength="7"></div>
 
   <!-- TITLE -->
   <div class="sec">📌 Заголовок</div>
@@ -217,46 +234,39 @@ body{font-family:'Montserrat',sans-serif;background:#0e0e1a;color:#fff;min-heigh
   <div class="sec" style="margin-top:2px">Позиция подсказки</div>
   <div class="pos-grid" id="pgTip"></div>
 
-  <!-- LOGO -->
   <div class="sec">Логотип</div>
   <div class="tog-row"><div class="tog on" id="logoTog" onclick="togLogo()"></div><span class="tog-lbl" id="logoLbl">Виден</span></div>
 
-  <!-- CONTENT -->
-  <div class="sec">Контент</div>
+  <div class="sec">✏️ Редактор</div>
   <div class="field"><label>Рубрика</label><input id="rubric" type="text" value="#Easy_WordOfDay" oninput="upd()"></div>
   <div class="field"><label>Заголовок</label><textarea id="ttl" oninput="upd()" style="min-height:50px">СЛОВО ДНЯ</textarea></div>
   <div class="field">
     <label>Фразы (EN | транскрипция | перевод)</label>
-    <small>Разделитель | между частями · каждая часть своим цветом</small>
+    <small>Каждая строка = одна фраза</small>
     <textarea id="phrases" oninput="upd()" style="min-height:160px">SCRUMPTIOUS | [скра́мпшэс] | восхитительно вкусный
-This cake is scrumptious! | [зис кэйк из скра́мпшэс] | Этот торт восхитителен!
-What a scrumptious meal! | [уот э скра́мпшэс ми:л] | Какая восхитительная еда!</textarea>
+This cake is scrumptious! | [зис кэйк из скра́мпшэс] | Этот торт восхитителен!</textarea>
   </div>
   <div class="field"><label>Подсказка</label><textarea id="tip" oninput="upd()" style="min-height:35px">👉 Telegram @lzi_en</textarea></div>
 
-  <!-- DOWNLOAD -->
   <div class="sec">Скачать</div>
   <div class="dl-row">
     <button class="btn btn-g" onclick="downloadPNG()">⬇ PNG</button>
     <button class="btn btn-s" onclick="resetCard()">↺ Сброс</button>
   </div>
-  <div class="progress" id="progress">⏳ Генерирую PNG...</div>
-  <p class="hint">PNG скачается автоматически в папку Загрузки 📁</p>
-
+  <div class="progress" id="progress">⏳ Генерирую...</div>
+  <p class="hint">PNG сохраняется в папку Загрузки 📁</p>
 </div>
 
 <!-- PREVIEW -->
 <div class="preview-col">
   <div class="fmt-badge" id="badge">⬛ Квадрат 1080×1080 · Telegram</div>
-  <div id="card-wrap">
-    <div id="card">
-      <span class="ctag" id="pTag">#Easy_WordOfDay</span>
-      <img class="cflag" id="flagImg" src="" alt="UK">
-      <div class="c-title-block" id="pTitle">СЛОВО ДНЯ</div>
-      <div class="c-phrases-block" id="pPhrases"></div>
-      <div class="c-tip-block" id="pTip">👉 Telegram @lzi_en</div>
-      <img class="cwm" id="logoImg" src="" alt="EP">
-    </div>
+  <div id="card">
+    <span class="ctag" id="pTag">#Easy_WordOfDay</span>
+    <img class="cflag" id="flagImg" src="" alt="UK">
+    <div class="c-title-block" id="pTitle">СЛОВО ДНЯ</div>
+    <div class="c-phrases-block" id="pPhrases"></div>
+    <div class="c-tip-block" id="pTip">👉 Telegram @lzi_en</div>
+    <img class="cwm" id="logoImg" src="" alt="EP">
   </div>
   <div class="stats-bar">
     <div class="stat"><span class="stat-val" id="stF">0</span><span class="stat-lbl">Фраз</span></div>
@@ -266,6 +276,7 @@ What a scrumptious meal! | [уот э скра́мпшэс ми:л] | Какая
   <p class="hint">👆 Предпросмотр в реальном времени</p>
 </div>
 </div>
+<div class="toast" id="toast">✅ Готово!</div>
 
 <script>
 // ── ASSETS ────────────────────────────────────────────────────
@@ -275,36 +286,450 @@ const FLAG=`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox
 document.getElementById('flagImg').src=FLAG;
 
 // ── STATE ─────────────────────────────────────────────────────
-let fmt='square',showLogo=true;
+let fmt='square',showLogo=true,activeCat='все';
 let bgColor='#0d2240';
 let C={title:'#ffffff',en:'#ffffff',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'};
 let F={title:'Montserrat',en:'Montserrat'};
 let POS={title:'top-left',phrases:'center-left',tip:'bottom-left'};
 let ALN={title:'left',phrases:'left'};
 
+// ══════════════════════════════════════════════════════════════
+// БОЛЬШАЯ БИБЛИОТЕКА ФРАЗ — 25 тем, 200+ фраз
+// ══════════════════════════════════════════════════════════════
+const LIBRARY=[
+  {name:'☕ В кафе',cat:'еда',phrases:`I'd like a coffee, please | [айд лайк э ко́фи пли:з] | Я бы хотел кофе, пожалуйста
+Can I have the menu? | [кэн ай хэв зэ мэ́нью] | Можно мне меню?
+What do you recommend? | [уот ду ю рэкомэ́нд] | Что вы рекомендуете?
+I'll have the pasta | [айл хэв зэ па́стэ] | Я возьму пасту
+Is this spicy? | [из зис спа́йси] | Это острое?
+No sugar, please | [ноу шу́гэ пли:з] | Без сахара, пожалуйста
+Takeaway, please | [тэ́йкэуэй пли:з] | С собой, пожалуйста
+The bill, please | [зэ бил пли:з] | Счёт, пожалуйста
+Anything else? | [э́нисинг элс] | Что-нибудь ещё?
+It's delicious! | [итс дили́шэс] | Это восхитительно вкусно!`},
+
+  {name:'😋 Вкус и еда',cat:'еда',phrases:`sweet | [сви:т] | сладкий
+sour | [са́уэ] | кислый
+bitter | [би́тэ] | горький
+salty | [со́лти] | солёный
+spicy | [спа́йси] | острый
+crunchy | [кра́нчи] | хрустящий
+creamy | [кри́ми] | кремовый / нежный
+juicy | [джу́си] | сочный
+bland | [блэнд] | пресный / безвкусный
+crispy | [кри́спи] | хрустящий / поджаристый`},
+
+  {name:'🍳 Готовим дома',cat:'еда',phrases:`to cook | [ту кук] | готовить
+to boil | [ту бойл] | варить
+to fry | [ту фрай] | жарить
+to bake | [ту бэйк] | печь / запекать
+to chop | [ту чоп] | нарезать
+to mix | [ту микс] | смешивать
+to taste | [ту тэйст] | пробовать на вкус
+to serve | [ту сё:в] | подавать
+recipe | [рэ́сэпи] | рецепт
+ingredient | [ингри́диэнт] | ингредиент`},
+
+  {name:'✈️ В аэропорту',cat:'путешествия',phrases:`Where is the gate? | [уэ из зэ гэйт] | Где выход на посадку?
+I missed my flight | [ай мист май флайт] | Я опоздал на рейс
+Is this flight on time? | [из зис флайт он тайм] | Рейс по расписанию?
+Where can I check in? | [уэ кэн ай чэк ин] | Где регистрация?
+I have a window seat | [ай хэв э уи́ндоу си:т] | У меня место у окна
+My luggage is lost | [май ла́гидж из лост] | Мой багаж потерялся
+How long is the flight? | [хау лонг из зэ флайт] | Сколько длится рейс?
+Do I need a visa? | [ду ай ни:д э ви́зэ] | Мне нужна виза?
+Passport control | [па́спот контро́ул] | паспортный контроль
+Baggage claim | [бэ́гидж клэйм] | получение багажа`},
+
+  {name:'🏨 В отеле',cat:'путешествия',phrases:`I have a reservation | [ай хэв э рэзэвэ́йшн] | У меня есть бронь
+What time is check-out? | [уот тайм из чэк-аут] | Когда выезд?
+Can I have a late check-out? | [кэн ай хэв э лэйт чэк-аут] | Можно поздний выезд?
+Is breakfast included? | [из брэ́кфэст инклу́дэд] | Завтрак включён?
+Can I have extra pillows? | [кэн ай хэв э́кстрэ пи́лоуз] | Можно дополнительные подушки?
+The room is too noisy | [зэ ру:м из ту: но́йзи] | В номере слишком шумно
+Could you call a taxi? | [куд ю ко:л э тэ́кси] | Не могли бы вызвать такси?
+Where is the gym? | [уэ из зэ джим] | Где спортзал?
+I'd like to extend my stay | [айд лайк ту экстэ́нд май стэй] | Я бы хотел продлить проживание
+Room service, please | [ру:м сё:вис пли:з] | Обслуживание в номере, пожалуйста`},
+
+  {name:'🗣 Живые фразы',cat:'разговорный',phrases:`No worries! | [ноу уа́риз] | Не переживай / Всё норм!
+You bet! | [ю бэт] | Ещё бы! / Конечно!
+I'm in! | [айм ин] | Я в деле!
+Fair enough | [фэ эна́ф] | Ладно / Справедливо
+Hang on | [хэнг он] | Подожди / Погоди
+It's up to you | [итс ап ту ю] | Решай сам / Как хочешь
+That's the thing | [зэтс зэ синг] | Вот в чём дело
+No big deal | [ноу биг ди:л] | Не страшно / Пустяк
+I can't help it | [ай кэнт хэлп ит] | Ничего не поделаю
+What's the point? | [уотс зэ пойнт] | В чём смысл?`},
+
+  {name:'😊 Эмоции',cat:'разговорный',phrases:`excited | [экса́йтэд] | в предвкушении / взволнованный
+worried | [уа́рид] | обеспокоенный
+relieved | [рили́:вд] | облегчённый
+grateful | [грэ́йтфул] | благодарный
+annoyed | [эно́йд] | раздражённый
+confused | [конфью́зд] | растерянный
+proud | [прауд] | гордый
+lonely | [ло́унли] | одинокий
+content | [контэ́нт] | довольный
+exhausted | [игзо́стэд] | изнеможённый / без сил`},
+
+  {name:'💼 На работе',cat:'работа',phrases:`I'll send it right away | [айл сэнд ит райт эуэй] | Отправлю прямо сейчас
+Let's schedule a meeting | [лэтс скэ́джул э ми́тинг] | Давайте запланируем встречу
+Can we reschedule? | [кэн уи риске́джул] | Можем перенести?
+I'll get back to you | [айл гэт бэк ту ю] | Свяжусь с тобой позже
+That works for me | [зэт уё:кс фо ми] | Мне подходит
+Could you clarify? | [куд ю клэ́рэфай] | Не могли бы уточнить?
+I'm working on it | [айм уё:кинг он ит] | Я работаю над этим
+Well done! | [уэл дан] | Отлично сделано!
+Deadline | [дэ́длайн] | срок / дедлайн
+Let's wrap up | [лэтс рэп ап] | Давайте подведём итоги`},
+
+  {name:'🏠 Дома',cat:'быт',phrases:`kitchen | [ки́тчэн] | кухня
+bedroom | [бэ́друм] | спальня
+living room | [ли́винг ру:м] | гостиная
+bathroom | [ба́:сру:м] | ванная / туалет
+balcony | [бэ́лкэни] | балкон
+cozy | [ко́узи] | уютный
+tidy | [та́йди] | аккуратный / прибранный
+messy | [мэ́си] | беспорядочный
+spacious | [спэ́йшэс] | просторный
+to clean up | [ту кли:н ап] | убираться`},
+
+  {name:'🛍 Шопинг',cat:'быт',phrases:`How much is it? | [хау мач из ит] | Сколько это стоит?
+Do you have this in my size? | [ду ю хэв зис ин май сайз] | Есть в моём размере?
+Can I try it on? | [кэн ай трай ит он] | Могу примерить?
+It's too expensive | [итс ту: экспэ́нсив] | Слишком дорого
+Is there a discount? | [из зэ э ди́скаунт] | Есть скидка?
+I'm just looking | [айм джаст лу́кинг] | Я просто смотрю
+Do you accept cards? | [ду ю эксэ́пт ка:дз] | Принимаете карты?
+Can I have a receipt? | [кэн ай хэв э риси́:т] | Можно чек?
+Sale | [сэйл] | распродажа
+Refund | [ри́фанд] | возврат денег`},
+
+  {name:'🌿 Природа',cat:'разное',phrases:`sunrise | [са́нрайз] | рассвет
+sunset | [са́нсэт] | закат
+forest | [фо́рэст] | лес
+ocean | [о́ушэн] | океан
+mountain | [ма́унтэн] | гора
+breeze | [бри:з] | лёгкий ветерок
+storm | [сто:м] | гроза / буря
+rainbow | [рэ́йнбоу] | радуга
+valley | [вэ́ли] | долина
+cliff | [клиф] | скала / утёс`},
+
+  {name:'🏃 Спорт и здоровье',cat:'разное',phrases:`to work out | [ту уё:к аут] | тренироваться
+to stretch | [ту стрэч] | растягиваться
+to run | [ту ран] | бегать
+to swim | [ту суим] | плавать
+gym | [джим] | спортзал
+I'm out of shape | [айм аут ов шэйп] | Я не в форме
+I feel fit | [ай фи:л фит] | Я чувствую себя в форме
+healthy diet | [хэ́лси да́йэт] | здоровое питание
+to burn calories | [ту бё:н кэ́лэриз] | сжигать калории
+personal trainer | [пё:снэл трэ́йнэ] | персональный тренер`},
+
+  {name:'🎭 Идиомы с едой',cat:'идиомы',phrases:`Piece of cake | [пис ов кэйк] | проще простого / пустяк
+Spill the beans | [спил зэ би:нз] | проболтаться / раскрыть секрет
+In a nutshell | [ин э на́тшэл] | вкратце / в двух словах
+Bite the bullet | [байт зэ бу́лит] | стиснуть зубы / собраться
+Bread and butter | [брэд энд ба́тэ] | основа / хлеб насущный
+Couch potato | [кауч потэ́йтоу] | лентяй / диванный овощ
+Spice things up | [спайс сингз ап] | добавить разнообразия
+Full of beans | [фул ов би:нз] | полон энергии
+Cup of tea | [кап ов ти:] | чашка чая / то что нравится
+Bite off more than you can chew | [байт оф мо: зэн ю кэн чу:] | взять на себя больше чем можешь`},
+
+  {name:'🎭 Популярные идиомы',cat:'идиомы',phrases:`Hit the nail on the head | [хит зэ нэйл он зэ хэд] | попасть в точку
+Kill two birds | [кил ту: бё:дз] | убить двух зайцев
+Under the weather | [а́ндэ зэ уэ́зэ] | чувствовать себя плохо
+Break a leg! | [брэйк э лэг] | Удачи! / Ни пуха!
+Once in a blue moon | [уанс ин э блу: му:н] | очень редко
+The ball is in your court | [зэ бо:л из ин йо: ко:т] | решать тебе
+Cost an arm and a leg | [кост эн а:м энд э лэг] | стоить баснословно дорого
+Speak of the devil | [спи:к ов зэ дэ́вэл] | лёгок на помине
+Better late than never | [бэ́тэ лэйт зэн нэ́вэ] | лучше поздно чем никогда
+Actions speak louder than words | [э́кшэнз спи:к ла́удэ зэн уё:дз] | дела говорят громче слов`},
+
+  {name:'🔤 Конструктор: I go',cat:'конструктор',phrases:`I go by car | [ай гоу бай ка:] | Я езжу на машине
+I go by bus | [ай гоу бай бас] | Я езжу на автобусе
+I go by train | [ай гоу бай трэйн] | Я езжу на поезде
+I go on foot | [ай гоу он фут] | Я хожу пешком
+I go shopping | [ай гоу шо́пинг] | Я хожу за покупками
+I go fishing | [ай гоу фи́шинг] | Я хожу на рыбалку
+I go to work | [ай гоу ту вё:к] | Я иду на работу
+I go alone | [ай гоу элоун] | Я хожу один
+I go with friends | [ай гоу уиз фрэндз] | Я хожу с друзьями
+I go home | [ай гоу хоум] | Я иду домой`},
+
+  {name:'🔤 Конструктор: I can',cat:'конструктор',phrases:`I can speak English | [ай кэн спи:к и́нглиш] | Я могу говорить по-английски
+I can help you | [ай кэн хэлп ю] | Я могу помочь тебе
+I can't help it | [ай кэнт хэлп ит] | Ничего не могу поделать
+I can do it! | [ай кэн ду ит] | Я могу это сделать!
+I can't wait | [ай кэнт уэйт] | Не могу дождаться
+I can see | [ай кэн си:] | Я вижу / Я понимаю
+I can try | [ай кэн трай] | Я могу попробовать
+I can't believe it | [ай кэнт бэли́в ит] | Не могу поверить
+I can make it | [ай кэн мэйк ит] | Я справлюсь / успею
+I can't stand it | [ай кэнт стэнд ит] | Я не могу этого вынести`},
+
+  {name:'🔤 Конструктор: I want',cat:'конструктор',phrases:`I want to learn English | [ай уонт ту лё:н и́нглиш] | Я хочу выучить английский
+I want to travel | [ай уонт ту трэ́вэл] | Я хочу путешествовать
+I want to try | [ай уонт ту трай] | Я хочу попробовать
+I want more | [ай уонт мо:] | Я хочу больше
+I don't want to | [ай доунт уонт ту] | Я не хочу
+I want to sleep | [ай уонт ту сли:п] | Я хочу спать
+I want to know | [ай уонт ту ноу] | Я хочу знать
+I want to understand | [ай уонт ту андэстэ́нд] | Я хочу понять
+I want it now | [ай уонт ит нау] | Я хочу это сейчас
+I want to speak | [ай уонт ту спи:к] | Я хочу говорить`},
+
+  {name:'🔤 Конструктор: I feel',cat:'конструктор',phrases:`I feel great! | [ай фи:л грэйт] | Я чувствую себя отлично!
+I feel tired | [ай фи:л та́йэд] | Я чувствую усталость
+I feel nervous | [ай фи:л нё:вэс] | Я нервничаю
+I feel happy | [ай фи:л хэ́пи] | Я чувствую себя счастливым
+I feel like a coffee | [ай фи:л лайк э ко́фи] | Мне хочется кофе
+I don't feel well | [ай доунт фи:л уэл] | Я нехорошо себя чувствую
+I feel lost | [ай фи:л лост] | Я растерян / заблудился
+I feel proud | [ай фи:л прауд] | Я горжусь
+I feel homesick | [ай фи:л хо́умсик] | Я скучаю по дому
+I feel like going out | [ай фи:л лайк гоуинг аут] | Мне хочется выйти куда-нибудь`},
+
+  {name:'🌙 Слова: красивые',cat:'слова',phrases:`serendipity | [сэрэндипити] | счастливая случайность
+melancholy | [мэ́лэнкоули] | лёгкая грусть / меланхолия
+aurora | [ауро́рэ] | северное сияние / рассвет
+resilience | [ризи́лиэнс] | стойкость / жизнеспособность
+wanderlust | [уа́ндэласт] | страсть к путешествиям
+cozy | [ко́узи] | уютный / тёплый
+ephemeral | [ифэ́мэрэл] | мимолётный / эфемерный
+velvet | [вэ́лвэт] | бархат / бархатный
+luminous | [лю́минэс] | светящийся / лучезарный
+ethereal | [исиэ́риэл] | воздушный / нереальный`},
+
+  {name:'🎯 Слова-ловушки',cat:'слова',phrases:`Magazine | [мэгэзи́:н] | НЕ магазин — а ЖУРНАЛ
+Artist | [а́:тист] | НЕ артист — а ХУДОЖНИК
+Decade | [дикэ́йд] | НЕ декада — а ДЕСЯТИЛЕТИЕ
+Brilliant | [бри́лиэнт] | НЕ бриллиант — а БЛЕСТЯЩИЙ/УМНЫЙ
+Accurate | [э́кьюрэт] | НЕ аккуратный — а ТОЧНЫЙ
+Corpse | [ко:пс] | НЕ корпус — а ТРУП 😱
+Prospect | [про́спэкт] | НЕ проспект — а ПЕРСПЕКТИВА
+Sympathetic | [симпэсэ́тик] | НЕ симпатичный — а СОЧУВСТВУЮЩИЙ
+Intelligent | [интэ́лиджэнт] | НЕ интеллигентный — а УМНЫЙ
+Original | [эри́джинэл] | НЕ оригинальный — а ИСХОДНЫЙ/ПЕРВОНАЧАЛЬНЫЙ`},
+
+  {name:'📱 Технологии',cat:'разное',phrases:`smartphone | [сма́:тфоун] | смартфон
+to download | [ту да́унлоуд] | скачивать
+to upload | [ту а́плоуд] | загружать
+password | [па́:суё:д] | пароль
+Wi-Fi | [уай фай] | Wi-Fi / беспроводной интернет
+to charge | [ту ча:дж] | заряжать
+notification | [нотификэ́йшн] | уведомление
+to update | [ту апдэ́йт] | обновлять
+screenshot | [скри́:ншот] | скриншот
+to stream | [ту стри:м] | стримить / транслировать`},
+
+  {name:'👨‍👩‍👧 Семья',cat:'разное',phrases:`parents | [пэ́рэнтс] | родители
+siblings | [си́блингз] | братья и сёстры
+to raise | [ту рэйз] | воспитывать
+to support | [ту сэпо́:т] | поддерживать
+to take care of | [ту тэйк кэ: ов] | заботиться о
+close-knit | [клоус-нит] | дружная (семья)
+to argue | [ту а́:гью] | спорить / ссориться
+to make up | [ту мэйк ап] | мириться
+to miss someone | [ту мис са́муан] | скучать по кому-то
+unconditional love | [анконди́шнэл лав] | безусловная любовь`},
+
+  {name:'🎬 Кино и сериалы',cat:'культура',phrases:`plot | [плот] | сюжет
+character | [кэ́рэктэ] | персонаж
+episode | [э́пэсоуд] | эпизод / серия
+binge-watch | [биндж-уоч] | смотреть запоем
+spoiler | [спо́йлэ] | спойлер
+cliffhanger | [кли́фхэнгэ] | интригующий финал / напряжённый момент
+sequel | [си́:куэл] | продолжение фильма
+prequel | [при́:куэл] | приквел
+blockbuster | [бло́кбастэ] | блокбастер / кассовый хит
+to stream | [ту стри:м] | смотреть онлайн`},
+
+  {name:'🎵 Музыка',cat:'культура',phrases:`lyrics | [ли́рикс] | слова песни / лирика
+chorus | [ко́рэс] | припев
+verse | [вё:с] | куплет
+to hum | [ту хам] | мурлыкать / напевать
+catchy | [кэ́тчи] | цепляющий / запоминающийся
+album | [э́лбэм] | альбом
+to release | [ту рили́:с] | выпускать (альбом)
+hit | [хит] | хит / популярная песня
+to perform | [ту пэфо́:м] | выступать
+playlist | [плэ́йлист] | плейлист`},
+
+  {name:'🌍 Начинаем предложение',cat:'конструктор',phrases:`I agree... | [ай эгри́:] | Я согласен...
+I promise... | [ай про́мис] | Я обещаю...
+I guess... | [ай гэс] | Я предполагаю... / Кажется...
+I understand... | [ай андэстэ́нд] | Я понимаю...
+I doubt... | [ай да́ут] | Я сомневаюсь...
+I wish... | [ай уиш] | Я желаю... / Хотел бы я...
+I prefer... | [ай прифё:] | Я предпочитаю...
+I mean... | [ай ми:н] | Я имею в виду...
+I wonder... | [ай уа́ндэ] | Мне интересно...
+I suggest... | [ай сэджэ́ст] | Я предлагаю...`},
+];
+
+// ── CATEGORIES ────────────────────────────────────────────────
+const CATS=['все','еда','путешествия','разговорный','работа','быт','слова','идиомы','конструктор','культура','разное'];
+const CAT_LABELS={все:'🌐 Все',еда:'🍽 Еда',путешествия:'✈️ Путешествия',разговорный:'🗣 Разговорный',работа:'💼 Работа',быт:'🏠 Быт',слова:'✨ Слова',идиомы:'🎭 Идиомы',конструктор:'🔤 Конструктор',культура:'🎬 Культура',разное:'🌿 Разное'};
+
+// Custom
+let customTopics={};
+try{customTopics=JSON.parse(localStorage.getItem('ep_custom')||'{}');}catch(e){}
+function saveCustom(){try{localStorage.setItem('ep_custom',JSON.stringify(customTopics));}catch(e){}}
+
+function addCustom(){
+  const n=document.getElementById('customName').value.trim();
+  const p=document.getElementById('customPhrases').value.trim();
+  if(!n||!p){showToast('⚠️ Заполни название и фразы!');return;}
+  customTopics[n]=p;saveCustom();
+  document.getElementById('customName').value='';
+  document.getElementById('customPhrases').value='';
+  renderLib();showToast('✅ Тема сохранена!');
+}
+
+// ── RENDER LIBRARY ────────────────────────────────────────────
+function buildCats(){
+  const el=document.getElementById('libCats');
+  el.innerHTML='';
+  CATS.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='lib-cat'+(c===activeCat?' active':'');
+    b.textContent=CAT_LABELS[c]||c;
+    b.onclick=()=>{activeCat=c;buildCats();renderLib();};
+    el.appendChild(b);
+  });
+}
+
+function renderLib(){
+  const q=(document.getElementById('libSearch').value||'').toLowerCase();
+  const el=document.getElementById('libItems');
+  el.innerHTML='';
+  // Built-in
+  LIBRARY.forEach(item=>{
+    const catOk=activeCat==='все'||item.cat===activeCat;
+    const qOk=!q||item.name.toLowerCase().includes(q)||item.phrases.toLowerCase().includes(q);
+    if(!catOk||!qOk)return;
+    const cnt=item.phrases.split('\n').filter(l=>l.trim()).length;
+    const btn=document.createElement('button');
+    btn.className='lib-btn';
+    btn.innerHTML=`<span class="lb-name">${item.name}</span><span class="lb-cnt">${cnt} фраз</span>`;
+    btn.onclick=()=>{
+      document.getElementById('phrases').value=item.phrases;
+      document.getElementById('ttl').value=item.name;
+      upd();showToast('✅ Загружено: '+item.name);
+    };
+    el.appendChild(btn);
+  });
+  // Custom
+  Object.entries(customTopics).forEach(([name,phrases])=>{
+    const qOk=!q||name.toLowerCase().includes(q)||phrases.toLowerCase().includes(q);
+    if(!qOk)return;
+    const cnt=phrases.split('\n').filter(l=>l.trim()).length;
+    const btn=document.createElement('button');
+    btn.className='lib-btn custom-topic';
+    btn.innerHTML=`<span class="lb-name">⭐ ${name}</span><span class="lb-cnt">${cnt} фраз · своя</span>`;
+    btn.onclick=()=>{
+      document.getElementById('phrases').value=phrases;
+      document.getElementById('ttl').value=name;
+      upd();showToast('✅ Загружено: '+name);
+    };
+    el.appendChild(btn);
+  });
+  if(!el.children.length){
+    el.innerHTML='<div style="color:#555;font-size:11px;padding:8px;grid-column:1/-1;text-align:center">Ничего не найдено</div>';
+  }
+}
+
+// ── WEEK CONTENT ──────────────────────────────────────────────
+const WEEK=[
+  {day:'Пн☀️',rub:'#Easy_WordOfDay',title:'СЛОВО ДНЯ: EVENTUALLY',tip:'🔖 Сохрани!\n👉 @lzi_en',phrases:`EVENTUALLY | [ивэ́нчуэли] | в конце концов / рано или поздно
+Eventually he learned English | [ивэ́нчуэли хи лёрнд и́нглиш] | В конце концов он выучил английский
+Everything will be okay eventually | [эврисинг уил би окэй ивэ́нчуэли] | Рано или поздно всё будет хорошо`},
+  {day:'Пн🌙',rub:'#Easy_Myth',title:'МИФЫ ОБ АНГЛИЙСКОМ',tip:'💬 Комментируй!\n👉 @lzi_en',phrases:`Нужен талант к языкам | ❌ МИФ | ✅ Нужна только система и привычка
+Надо жить в стране | ❌ МИФ | ✅ Миллионы говорят бегло не уезжая
+После 30 учить поздно | ❌ МИФ | ✅ Взрослые быстрее понимают правила`},
+  {day:'Вт☀️',rub:'#Easy_Phrase_Day',title:'ФРАЗА ДНЯ: I can\'t help it',tip:'🔖 Сохрани!\n👉 @lzi_en',phrases:`I can't help it | [ай кэнт хэлп ит] | Ничего не могу поделать
+I can't help laughing | [ай кэнт хэлп ла́финг] | Я не могу не смеяться
+Sorry, I can't help it | [со́ри ай кэнт хэлп ит] | Извини, ничего не поделаю`},
+  {day:'Ср☀️',rub:'#Easy_Grammar',title:'MUCH vs MANY',tip:'🔖 Сохрани правило!\n👉 @lzi_en',phrases:`MANY — для того что СЧИТАЮТ | [мэ́ни] | many words / many friends
+MUCH — для того что НЕ СЧИТАЮТ | [мач] | much time / much money
+much coffee ☕ | many cups 🍵 | much music 🎵 / many songs 🎶`},
+  {day:'Ср🌙',rub:'#Easy_Beautiful',title:'СЛОВО: SERENDIPITY',tip:'✨ Сохрани!\n👉 @lzi_en',phrases:`SERENDIPITY | [сэрэндипити] | счастливая случайность
+Meeting you was pure serendipity | [ми́тинг ю уоз пью сэрэндипити] | Встретить тебя — счастливая случайность
+Life is full of serendipity | [лайф из фул ов сэрэндипити] | Жизнь полна счастливых случайностей`},
+  {day:'Чт☀️',rub:'#Easy_Trap',title:'СЛОВА-ЛОВУШКИ!',tip:'🚨 Не попадись!\n👉 @lzi_en',phrases:`Decade | [дикэ́йд] | НЕ декада — а ДЕСЯТИЛЕТИЕ
+Brilliant | [бри́лиэнт] | НЕ бриллиант — а БЛЕСТЯЩИЙ
+Corpse | [ко:пс] | НЕ корпус — а ТРУП 😱
+Accurate | [э́кьюрэт] | НЕ аккуратный — а ТОЧНЫЙ`},
+  {day:'Пт🌙',rub:'#Easy_Song',title:'РАЗБИРАЕМ: Shallow',tip:'🎵 Следующая песня?\n👉 @lzi_en',phrases:`I'm off the deep end | [айм оф зэ ди:п энд] | Я сорвался в омут
+watch as I dive in | [уоч эз ай дайв ин] | смотри как я ныряю
+off the deep end | [оф зэ ди:п энд] | сорваться / потерять голову`},
+  {day:'Сб☀️',rub:'#Easy_LifeHack',title:'ЛАЙФХАК: SHADOWING',tip:'💪 Попробуй!\n👉 @lzi_en',phrases:`Shadowing | [шэ́доуинг] | метод тени — повторяй за носителем
+Включи видео на английском | → | повторяй вслух за диктором
+5 минут в день | → | Через неделю почувствуешь разницу!`},
+  {day:'Пн☀️',rub:'#Easy_WordOfDay',title:'СЛОВО: SCRUMPTIOUS',tip:'🔖 Сохрани!\n👉 @lzi_en',phrases:`SCRUMPTIOUS | [скра́мпшэс] | восхитительно вкусный
+This cake is absolutely scrumptious! | [зис кэйк из эбсолу́тли скра́мпшэс] | Этот торт восхитительно вкусный!
+What a scrumptious meal! | [уот э скра́мпшэс ми:л] | Какая восхитительная еда!`},
+  {day:'Пн🌙',rub:'#Easy_Idiom',title:'ИДИОМЫ С ЕДОЙ 🥧',tip:'🔖 Сохрани!\n👉 @lzi_en',phrases:`Piece of cake | [пис ов кэйк] | проще простого / пустяк
+Spill the beans | [спил зэ би:нз] | проболтаться / раскрыть секрет
+In a nutshell | [ин э на́тшэл] | вкратце / в двух словах`},
+  {day:'Вт☀️',rub:'#Easy_OrderPlease',title:'КАК СДЕЛАТЬ ЗАКАЗ',tip:'🔖 Сохрани!\n👉 @lzi_en',phrases:`I'd like... | [айд лайк] | Я бы хотел...
+Can I have...? | [кэн ай хэв] | Можно мне...?
+The bill, please | [зэ бил пли:з] | Счёт, пожалуйста
+Is the tip included? | [из зэ тип инклу́дэд] | Чаевые включены?`},
+  {day:'Чт☀️',rub:'#Easy_Taste',title:'СЛОВА ПРО ВКУС 😋',tip:'🔖 Сохрани словарик!\n👉 @lzi_en',phrases:`sweet | [сви:т] | сладкий
+sour | [са́уэ] | кислый
+spicy | [спа́йси] | острый
+crunchy | [кра́нчи] | хрустящий
+creamy | [кри́ми] | кремовый / нежный`},
+];
+
+function buildWeekList(){
+  const el=document.getElementById('weekList');
+  el.innerHTML='';
+  WEEK.forEach((item,i)=>{
+    const row=document.createElement('div');
+    row.className='week-row';
+    row.innerHTML=`<span class="wr-day">${item.day}</span><span class="wr-rub">${item.rub}</span><span class="wr-title">${item.title}</span><button class="wr-btn" onclick="loadWeek(${i})">↓</button>`;
+    el.appendChild(row);
+  });
+}
+
+function loadWeek(i){
+  const item=WEEK[i];
+  document.getElementById('rubric').value=item.rub;
+  document.getElementById('ttl').value=item.title;
+  document.getElementById('phrases').value=item.phrases;
+  document.getElementById('tip').value=item.tip;
+  upd();showToast('✅ Загружено: '+item.title);
+}
+
 // ── TEMPLATES ─────────────────────────────────────────────────
 const TEMPLATES={
-  '#Easy_WordOfDay':{bg:'#0d2240',C:{title:'#FFD700',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'СЛОВО ДНЯ',tip:'🔖 Сохрани слово!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:20,szEn:13,szTr:10,szRu:10},
-  '#Easy_Phrase_Day':{bg:'#1B3A6B',C:{title:'#FFFFFF',en:'#FFD700',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'ФРАЗА ДНЯ',tip:'🔖 Сохрани фразу!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:20,szEn:13,szTr:10,szRu:10},
-  '#Easy_Grammar':{bg:'#080820',C:{title:'#7EB8FF',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'ГРАММАТИКА',tip:'🔖 Сохрани правило!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:18,szEn:12,szTr:10,szRu:10},
+  '#Easy_WordOfDay':{bg:'#0d2240',C:{title:'#FFD700',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'СЛОВО ДНЯ',tip:'🔖 Сохрани!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:20,szEn:13,szTr:10,szRu:10},
+  '#Easy_Phrase_Day':{bg:'#1B3A6B',C:{title:'#FFFFFF',en:'#FFD700',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'ФРАЗА ДНЯ',tip:'🔖 Сохрани!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:20,szEn:13,szTr:10,szRu:10},
+  '#Easy_Grammar':{bg:'#080820',C:{title:'#7EB8FF',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'ГРАММАТИКА',tip:'🔖 Сохрани!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:18,szEn:12,szTr:10,szRu:10},
   '#Easy_Trap':{bg:'#1a0808',C:{title:'#FF4444',en:'#FFFFFF',tr:'#FFB3B3',ru:'#FFE0A0',tip:'#FFD700'},title:'ЛОВУШКИ!',tip:'🚨 Не попадись!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:22,szEn:12,szTr:9,szRu:9},
   '#Easy_Beautiful':{bg:'#080828',C:{title:'#CE93D8',en:'#E1BEE7',tr:'#B39DDB',ru:'#C5CAE9',tip:'#FFD700'},title:'КРАСИВЫЕ СЛОВА',tip:'✨ Сохрани!\n👉 @lzi_en',POS:{title:'top-center',phrases:'center-center',tip:'bottom-center'},szTitle:18,szEn:13,szTr:10,szRu:10},
-  '#Easy_Tonight':{bg:'#050510',C:{title:'#7EB8FF',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'СЛОВО ПЕРЕД СНОМ 🌙',tip:'🌙 Спокойной ночи!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:16,szEn:12,szTr:9,szRu:9},
-  '#Easy_WowFact':{bg:'#1a0800',C:{title:'#FFA500',en:'#FFFFFF',tr:'#FFD700',ru:'#FFE0A0',tip:'#FFA500'},title:'🤯 ВОТ ЭТО ДА!',tip:'👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:20,szEn:12,szTr:10,szRu:10},
   '#Easy_Idiom':{bg:'#0a1a08',C:{title:'#A8D8A8',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'ИДИОМЫ 🥧',tip:'🔖 Сохрани!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:20,szEn:12,szTr:9,szRu:9},
+  '#Easy_WowFact':{bg:'#1a0800',C:{title:'#FFA500',en:'#FFFFFF',tr:'#FFD700',ru:'#FFE0A0',tip:'#FFA500'},title:'🤯 ВОТ ЭТО ДА!',tip:'👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:20,szEn:12,szTr:10,szRu:10},
+  '#Easy_Tonight':{bg:'#050510',C:{title:'#7EB8FF',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'},title:'СЛОВО ПЕРЕД СНОМ 🌙',tip:'🌙 Спокойной ночи!\n👉 @lzi_en',POS:{title:'top-left',phrases:'center-left',tip:'bottom-left'},szTitle:16,szEn:12,szTr:9,szRu:9},
   'YouTube Превью':{bg:'#0d2240',C:{title:'#FFD700',en:'#FFFFFF',tr:'#90CAF9',ru:'#A8D8A8',tip:'#ffffff'},title:'АНГЛИЙСКИЙ\nПРОСТО!',tip:'Easy Peasy 🇬🇧',POS:{title:'center-left',phrases:'center-right',tip:'bottom-right'},szTitle:28,szEn:14,szTr:11,szRu:11},
 };
-
 const tplGrid=document.getElementById('tplGrid');
 Object.entries(TEMPLATES).forEach(([name,tpl])=>{
   const btn=document.createElement('button');
   btn.className='tpl-btn';
-  btn.innerHTML=`<span class="tpl-name">${name}</span><span class="tpl-desc">Применить стиль</span>`;
-  btn.onclick=()=>applyTemplate(name,tpl);
+  btn.innerHTML=`<span class="tn">${name}</span><span class="td">Стиль 1 кликом</span>`;
+  btn.onclick=()=>applyTpl(name,tpl);
   tplGrid.appendChild(btn);
 });
-
-function applyTemplate(name,tpl){
+function applyTpl(name,tpl){
   setBg(tpl.bg);
   Object.entries(tpl.C).forEach(([k,v])=>setClr(k,v));
   POS=Object.assign({},tpl.POS);
@@ -315,72 +740,13 @@ function applyTemplate(name,tpl){
   if(tpl.szEn)document.getElementById('szEn').value=tpl.szEn;
   if(tpl.szTr)document.getElementById('szTr').value=tpl.szTr;
   if(tpl.szRu)document.getElementById('szRu').value=tpl.szRu;
-  // update pos grids
+  const POSS=['top-left','top-center','top-right','center-left','center-center','center-right','bottom-left','bottom-center','bottom-right'];
   ['title','phrases','tip'].forEach(k=>{
-    document.querySelectorAll(`#pg${k.charAt(0).toUpperCase()+k.slice(1)} .pos-btn`).forEach((b,i)=>{
-      b.classList.toggle('active',POSS[i]===POS[k]);
-    });
+    document.querySelectorAll(`#pg${k.charAt(0).toUpperCase()+k.slice(1)} .pos-btn`).forEach((b,i)=>b.classList.toggle('active',POSS[i]===POS[k]));
   });
   if(name==='YouTube Превью')setFmt('youtube');
-  upd();
+  upd();showToast('✅ Шаблон: '+name);
 }
-
-// ── LIBRARY ───────────────────────────────────────────────────
-const LIBRARY={
-  '☕ Кафе и еда':`I'd like a coffee | [айд лайк э ко́фи] | Я бы хотел кофе
-Can I have the menu? | [кэн ай хэв зэ мэ́нью] | Можно мне меню?
-The bill, please | [зэ бил пли:з] | Счёт, пожалуйста
-Is this spicy? | [из зис спа́йси] | Это острое?
-Takeaway, please | [тэ́йкэуэй пли:з] | С собой, пожалуйста`,
-  '✈️ Путешествия':`Where is the gate? | [уэ из зэ гэйт] | Где выход на посадку?
-I have a reservation | [ай хэв э рэзэвэ́йшн] | У меня есть бронь
-What time is check-out? | [уот тайм из чэк-аут] | Когда выезд?
-I missed my flight | [ай мист май флайт] | Я опоздал на рейс
-Could you help me? | [куд ю хэлп ми] | Не могли бы вы помочь?`,
-  '😊 Эмоции':`tired | [та́йэд] | уставший
-excited | [экса́йтэд] | в предвкушении
-worried | [уа́рид] | обеспокоенный
-relieved | [рили́:вд] | облегчённый
-grateful | [грэ́йтфул] | благодарный`,
-  '🏠 Дом':`kitchen | [ки́тчэн] | кухня
-bedroom | [бэ́друм] | спальня
-living room | [ли́винг рум] | гостиная
-bathroom | [ба́:сруm] | ванная
-balcony | [бэ́лкэни] | балкон`,
-  '💼 Работа':`meeting | [ми́:тинг] | встреча / совещание
-deadline | [дэ́длайн] | дедлайн
-I'll send it | [айл сэнд ит] | Я отправлю это
-Let's discuss | [лэтс диска́с] | Давайте обсудим
-Well done! | [уэл дан] | Отлично сделано!`,
-  '🌿 Природа':`sunrise | [са́нрайз] | рассвет
-sunset | [са́нсэт] | закат
-forest | [фо́рэст] | лес
-ocean | [о́ушэн] | океан
-mountain | [ма́унтэн] | гора`,
-  '🎭 Идиомы':`piece of cake | [пис ов кэйк] | проще простого
-spill the beans | [спил зэ би:нз] | проболтаться
-in a nutshell | [ин э на́тшэл] | вкратце
-bite the bullet | [байт зэ бу́лит] | стиснуть зубы
-hit the nail | [хит зэ нэйл] | попасть в точку`,
-  '🔤 I go...':`I go by car | [ай гоу бай ка:] | Я езжу на машине
-I go by bus | [ай гоу бай бас] | Я езжу на автобусе
-I go shopping | [ай гоу шо́пинг] | Я хожу за покупками
-I go fishing | [ай гоу фи́шинг] | Я хожу на рыбалку
-I go to work | [ай гоу ту вё:к] | Я иду на работу`,
-};
-
-const libGrid=document.getElementById('libGrid');
-Object.entries(LIBRARY).forEach(([topic,content])=>{
-  const el=document.createElement('div');
-  el.className='lib-item';
-  el.innerHTML=`<span class="lib-topic">${topic}</span><span class="lib-count">${content.split('\n').length} фраз</span>`;
-  el.onclick=()=>{
-    document.getElementById('phrases').value=content;
-    document.getElementById('ttl').value=topic;
-    upd();
-  };
-  libGrid.appendChild(el);
-});
 
 // ── FONTS ─────────────────────────────────────────────────────
 const FONTS=['Montserrat','Roboto','Nunito','Raleway','Oswald','Ubuntu','Exo 2','PT Sans','Russo One','Bebas Neue'];
@@ -395,8 +761,7 @@ function buildFG(id,key){
     el.appendChild(b);
   });
 }
-buildFG('fgTitle','title');
-buildFG('fgEn','en');
+buildFG('fgTitle','title');buildFG('fgEn','en');
 
 // ── PALETTES ──────────────────────────────────────────────────
 const PAL=['#FFFFFF','#F5F0EB','#FFD700','#FFA500','#FF6B6B','#FF4444','#90CAF9','#64B5F6','#7EB8FF','#A8D8A8','#66BB6A','#CE93D8','#1B3A6B','#0d2240','#080808','#FFE0A0'];
@@ -412,15 +777,12 @@ function buildPal(id,key){
   });
 }
 ['title','en','tr','ru','tip'].forEach(k=>buildPal('pal'+k.charAt(0).toUpperCase()+k.slice(1),k));
-
 function setClr(key,v){
   if(!/^#[0-9A-Fa-f]{6}$/.test(v))return;
   C[key]=v;
   const K=key.charAt(0).toUpperCase()+key.slice(1);
-  const pk=document.getElementById('c'+K);
-  const hx=document.getElementById('c'+K+'Hx');
-  if(pk)pk.value=v;
-  if(hx)hx.value=v;
+  const pk=document.getElementById('c'+K);const hx=document.getElementById('c'+K+'Hx');
+  if(pk)pk.value=v;if(hx)hx.value=v;
   upd();
 }
 
@@ -452,9 +814,7 @@ function buildPG(id,key,def){
     el.appendChild(b);
   });
 }
-buildPG('pgTitle','title','top-left');
-buildPG('pgPhrases','phrases','center-left');
-buildPG('pgTip','tip','bottom-left');
+buildPG('pgTitle','title','top-left');buildPG('pgPhrases','phrases','center-left');buildPG('pgTip','tip','bottom-left');
 
 function setAln(blk,a){
   ALN[blk]=a;
@@ -464,16 +824,11 @@ function setAln(blk,a){
 }
 
 // ── FORMAT ────────────────────────────────────────────────────
-const FMT_SIZES={square:{w:440,h:440,label:'⬛ Квадрат 1080×1080 · Telegram',badge:'SQ',dlW:1080,dlH:1080},vertical:{w:275,h:489,label:'📱 Вертикаль 1080×1920 · TikTok/Shorts',badge:'VT',dlW:1080,dlH:1920},youtube:{w:440,h:248,label:'▶️ YouTube Превью 1280×720',badge:'YT',dlW:1280,dlH:720},stories:{w:275,h:489,label:'📸 Stories 1080×1920 · Instagram',badge:'ST',dlW:1080,dlH:1920}};
-
+const FMT={square:{w:440,h:440,label:'⬛ Квадрат 1080×1080 · Telegram',badge:'SQ',dlW:1080,dlH:1080},vertical:{w:275,h:489,label:'📱 Вертикаль 1080×1920 · TikTok',badge:'VT',dlW:1080,dlH:1920},youtube:{w:440,h:248,label:'▶️ YouTube Превью 1280×720',badge:'YT',dlW:1280,dlH:720},stories:{w:275,h:489,label:'📸 Stories 1080×1920',badge:'ST',dlW:1080,dlH:1920}};
 function setFmt(f){
-  fmt=f;
-  const card=document.getElementById('card');
-  card.className='';
-  if(f!=='square')card.classList.add(f);
-  const s=FMT_SIZES[f];
-  card.style.width=s.w+'px';
-  card.style.height=s.h+'px';
+  fmt=f;const card=document.getElementById('card');
+  card.className='';if(f!=='square')card.classList.add(f);
+  const s=FMT[f];card.style.width=s.w+'px';card.style.height=s.h+'px';
   document.getElementById('badge').textContent=s.label;
   document.getElementById('stFmt').textContent=s.badge;
   ['fmtSq','fmtVt','fmtYt','fmtSt'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',['square','vertical','youtube','stories'][i]===f));
@@ -485,12 +840,8 @@ function togLogo(){showLogo=!showLogo;document.getElementById('logoTog').classLi
 
 // ── APPLY POS ─────────────────────────────────────────────────
 function applyPos(el,key){
-  const card=document.getElementById('card');
-  const cw=card.offsetWidth,ch=card.offsetHeight;
-  const pad=fmt==='youtube'?20:18;
-  const [vert,horiz]=POS[key].split('-');
-  el.style.position='absolute';
-  el.style.width=`calc(100% - ${pad*2}px)`;
+  const pad=18;const[vert,horiz]=POS[key].split('-');
+  el.style.position='absolute';el.style.width=`calc(100% - ${pad*2}px)`;
   if(vert==='top'){el.style.top=pad+'px';el.style.bottom='auto';el.style.transform='none';}
   if(vert==='center'){el.style.top='50%';el.style.bottom='auto';el.style.transform='translateY(-50%)';}
   if(vert==='bottom'){el.style.bottom=pad+'px';el.style.top='auto';el.style.transform='none';}
@@ -526,101 +877,77 @@ function upd(){
   const szTitle=parseInt(document.getElementById('szTitle').value);
   const szTip=parseInt(document.getElementById('szTip').value);
   const lhT=(parseInt(document.getElementById('lhTitle').value)/10).toFixed(2);
-  // labels
-  ['szTitle','szEn','szTr','szRu','szTip'].forEach(id=>{document.getElementById(id+'V').textContent=document.getElementById(id).value+'px';});
+  ['szTitle','szEn','szTr','szRu','szTip'].forEach(id=>document.getElementById(id+'V').textContent=document.getElementById(id).value+'px');
   document.getElementById('lhTitleV').textContent=(parseInt(document.getElementById('lhTitle').value)/10).toFixed(2);
   document.getElementById('lhPhV').textContent=(parseInt(document.getElementById('lhPh').value)/10).toFixed(2);
   document.getElementById('gapPhV').textContent=document.getElementById('gapPh').value+'px';
-  // tag
   const tg=document.getElementById('pTag');
   tg.textContent=document.getElementById('rubric').value;
-  tg.style.color=C.tr;
-  tg.style.fontFamily=`'${F.title}',sans-serif`;
-  // title
+  tg.style.color=C.tr;tg.style.fontFamily=`'${F.title}',sans-serif`;
   const ttlEl=document.getElementById('pTitle');
   ttlEl.textContent=document.getElementById('ttl').value;
   ttlEl.style.cssText=`font-size:${szTitle}px;font-weight:900;color:${C.title};font-family:'${F.title}',sans-serif;line-height:${lhT};text-align:${ALN.title};word-break:break-word;white-space:pre-wrap`;
   applyPos(ttlEl,'title');
-  // phrases
   const phEl=document.getElementById('pPhrases');
   phEl.innerHTML=buildPhrases();
   applyPos(phEl,'phrases');
-  // tip
   const tipEl=document.getElementById('pTip');
   tipEl.textContent=document.getElementById('tip').value;
   tipEl.style.cssText=`font-size:${szTip}px;font-weight:700;color:${C.tip};font-family:'${F.en}',sans-serif;text-align:${ALN.phrases};word-break:break-word;white-space:pre-wrap`;
   applyPos(tipEl,'tip');
-  // stats
   const lines=document.getElementById('phrases').value.split('\n').filter(l=>l.trim());
   document.getElementById('stF').textContent=lines.length;
   const cardH=document.getElementById('card').offsetHeight;
   const rowH=(parseInt(document.getElementById('szEn').value)+parseInt(document.getElementById('szTr').value)+parseInt(document.getElementById('szRu').value))*(parseInt(document.getElementById('lhPh').value)/10)+parseInt(document.getElementById('gapPh').value);
-  const tot=rowH*lines.length;
-  const avail=cardH*0.55;
+  const tot=rowH*lines.length;const avail=cardH*0.55;
   const fit=document.getElementById('stFit');
   if(tot<=avail){fit.className='stat s-ok';document.getElementById('stFitV').textContent='✅ OK';}
   else if(tot<=avail*1.3){fit.className='stat s-warn';document.getElementById('stFitV').textContent='⚠️ Тесно';}
   else{fit.className='stat s-bad';document.getElementById('stFitV').textContent='❌ Много';}
 }
 
-// ── DOWNLOAD PNG ──────────────────────────────────────────────
+// ── DOWNLOAD ──────────────────────────────────────────────────
 async function downloadPNG(){
   const prog=document.getElementById('progress');
-  prog.className='progress show';
-  prog.textContent='⏳ Генерирую PNG...';
+  prog.className='progress show';prog.textContent='⏳ Генерирую PNG...';
   const card=document.getElementById('card');
-  const s=FMT_SIZES[fmt];
-  // temporarily scale card for export
-  const origW=card.style.width,origH=card.style.height;
-  const scaleX=s.dlW/card.offsetWidth;
-  const scaleY=s.dlH/card.offsetHeight;
+  const s=FMT[fmt];
   try{
-    const canvas=await html2canvas(card,{
-      scale:Math.max(scaleX,scaleY),
-      useCORS:true,
-      allowTaint:true,
-      backgroundColor:bgColor,
-      logging:false,
-      width:card.offsetWidth,
-      height:card.offsetHeight,
-    });
-    // resize to exact export dimensions
-    const outCanvas=document.createElement('canvas');
-    outCanvas.width=s.dlW;
-    outCanvas.height=s.dlH;
-    const ctx=outCanvas.getContext('2d');
-    ctx.drawImage(canvas,0,0,s.dlW,s.dlH);
+    const canvas=await html2canvas(card,{scale:Math.max(s.dlW/card.offsetWidth,s.dlH/card.offsetHeight),useCORS:true,allowTaint:true,backgroundColor:bgColor,logging:false,width:card.offsetWidth,height:card.offsetHeight});
+    const out=document.createElement('canvas');
+    out.width=s.dlW;out.height=s.dlH;
+    out.getContext('2d').drawImage(canvas,0,0,s.dlW,s.dlH);
     const link=document.createElement('a');
     const rub=document.getElementById('rubric').value.replace(/[^a-zA-Z0-9]/g,'_');
-    link.download=`EasyPeasy_${rub}_${s.badge}_${Date.now()}.png`;
-    link.href=outCanvas.toDataURL('image/png');
+    link.download=`EasyPeasy_${rub}_${s.badge}.png`;
+    link.href=out.toDataURL('image/png');
     link.click();
-    prog.textContent='✅ PNG скачан в папку Загрузки!';
-    setTimeout(()=>prog.className='progress',3000);
-  }catch(e){
-    prog.textContent='❌ Ошибка — попробуй скриншот вручную';
-    setTimeout(()=>prog.className='progress',3000);
-  }
+    prog.textContent='✅ PNG скачан!';setTimeout(()=>prog.className='progress',3000);
+  }catch(e){prog.textContent='❌ Ошибка — сделай скриншот';setTimeout(()=>prog.className='progress',3000);}
+}
+
+// ── TOAST ─────────────────────────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast show';
+  setTimeout(()=>t.className='toast',2500);
 }
 
 // ── RESET ─────────────────────────────────────────────────────
 function resetCard(){
   document.getElementById('ttl').value='СЛОВО ДНЯ';
   document.getElementById('rubric').value='#Easy_WordOfDay';
-  document.getElementById('phrases').value=`SCRUMPTIOUS | [скра́мпшэс] | восхитительно вкусный
-This cake is scrumptious! | [зис кэйк из скра́мпшэс] | Этот торт восхитителен!
-What a scrumptious meal! | [уот э скра́мпшэс ми:л] | Какая восхитительная еда!`;
+  document.getElementById('phrases').value='SCRUMPTIOUS | [скра́мпшэс] | восхитительно вкусный';
   document.getElementById('tip').value='👉 Telegram @lzi_en';
   ['szTitle','szEn','szTr','szRu','szTip'].forEach((id,i)=>document.getElementById(id).value=[18,11,9,9,9][i]);
-  document.getElementById('lhTitle').value=12;
-  document.getElementById('lhPh').value=12;
-  document.getElementById('gapPh').value=2;
+  document.getElementById('lhTitle').value=12;document.getElementById('lhPh').value=12;document.getElementById('gapPh').value=2;
   bgColor='#0d2240';C={title:'#ffffff',en:'#ffffff',tr:'#90CAF9',ru:'#A8D8A8',tip:'#FFD700'};F={title:'Montserrat',en:'Montserrat'};
   POS={title:'top-left',phrases:'center-left',tip:'bottom-left'};ALN={title:'left',phrases:'left'};
   setBg('#0d2240');setFmt('square');if(!showLogo)togLogo();upd();
 }
 
-upd();
+// ── INIT ─────────────────────────────────────────────────────
+buildCats();renderLib();buildWeekList();upd();
 </script>
 </body>
 </html>
